@@ -4,9 +4,12 @@
 RED='\033[0;31m'
 GRN='\033[0;32m'
 NC='\033[0m' 
+
+#Location of password dictionary
 path=/root/words.txt
+
+# Should be supplied to you...
 username=test
-password=test
 realm=digest-realm
 method=GET
 url=/Auth/digest-authentication
@@ -14,6 +17,8 @@ nonce=MTUzOTMxMTQ4Nzk3Nzo2NzNkYzQ2MjlmMDM0ZDNlMDcwMGQxN2VjZjg4NWI2YQ==
 nc=00000002
 cnonce=760a2297807a0a51
 qop=auth
+
+#This is the value we know it should be
 response=d41f6f6cf5afda0e981905711808ce37
 
 
