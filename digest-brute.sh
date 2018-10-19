@@ -12,7 +12,7 @@ method=GET
 url=/
 nonce=cPmikbouBQA=92809400a6834c1fbc7b098b91e0fe759da84dcd
 nc=00000001
-cnonce=760a2297807a0a51
+cnonce=6bc37926abce6649
 qop=auth
 
 
