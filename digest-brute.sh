@@ -5,45 +5,30 @@ RED='\033[0;31m'
 GRN='\033[0;32m'
 NC='\033[0m' 
 
-#Location of password dictionary
-path=/root/words.txt
-
-# Should be supplied to you...
-username=test
-realm=digest-realm
+password=4425
+username=infomte
+realm=members only
 method=GET
-url=/Auth/digest-authentication
-nonce=MTUzOTMxMTQ4Nzk3Nzo2NzNkYzQ2MjlmMDM0ZDNlMDcwMGQxN2VjZjg4NWI2YQ==
+url="/"
+nonce=cPmikbouBQA=92809400a6834c1fbc7b098b91e0fe759da84dcd
 nc=00000002
 cnonce=760a2297807a0a51
 qop=auth
-
-#This is the value we know it should be
-response=d41f6f6cf5afda0e981905711808ce37
 
 
 clear
 echo "************************************************"
 echo " 		      Digest Bruteforce              *"
 echo "************************************************"
-echo "Looking for response: $response"
-while IFS= read -r line
-do
-  hash1="$(echo -n $username:$realm:$line | md5sum | awk '{print $1}')"
+echo "H1 = MD5($username:$realm:$password)"
+  hash1="$(echo -n $username:$realm:$password | md5sum | awk '{print $1}')"
 #  echo hash1: $hash1
+echo "H2 = MD5($method:url)"
   hash2="$(echo -n $method:$url | md5sum | awk '{print $1}')"
 #  echo hash2: $hash2
+echo "response = MD5($hash1:$nonce:$nc:$cnonce:$qop:$hash2)"
   calculated="$(echo -n $hash1:$nonce:$nc:$cnonce:$qop:$hash2 | md5sum | cut -d " " -f1)"
-#  echo calculated: $response
-  if [ "$calculated" == "$response" ]
-	then
-		echo -e "${GRN}Password: $line ${NC} -> ${GRN}Calculated: $calculated ${NC}== ${GRN}Response: $response${NC}"
-		break;
-	else
-		echo -e "${RED}Password: $line ${NC} -> ${RED}Calculated: $calculated ${NC}!= ${RED}Response: $response${NC}"
-  fi
-done < "$path"
-
+echo "${GRN}$response${NC}"
 
 
 
